@@ -35,7 +35,7 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_security_group" "ec2_sg" {
-  name = "allow-all"
+  name = "ec2-sg"
 
   ingress {
     cidr_blocks = [
@@ -65,14 +65,14 @@ resource "aws_security_group" "ec2_sg" {
 
 resource "aws_instance" "ec2" {
 
-    ami = data.aws_ami.ubuntu.id
-    instance_type = "t2.micro"
-    associate_public_ip_address = true
-    key_name = var.key_name
-    security_groups = [aws_security_group.ec2_sg.name]
+  ami                         = data.aws_ami.ubuntu.id
+  instance_type               = "t2.micro"
+  associate_public_ip_address = true
+  key_name                    = var.key_name
+  security_groups             = [aws_security_group.ec2_sg.name]
 
-    tags = {
-      project = var.project_name
-    }
+  tags = {
+    project = var.project_name
+  }
 
 }
