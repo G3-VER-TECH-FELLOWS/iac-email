@@ -32,6 +32,7 @@ To execute a playbook and apply the defined configurations to your hosts, use:
 
 ```bash
 ansible-playbook playbook.yml -i inventory.yml --extra-vars "@secrets.yml"
+ansible-playbook playbook.sonar.yml -i inventory.yml --extra-vars "@secrets.yml"
 ```
 
 This command will run the `playbook.yml`, applying the configurations and tasks defined to the hosts listed in `inventory.yml` and using the variables defined in `secrets.yml`.

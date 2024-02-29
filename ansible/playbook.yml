@@ -55,3 +55,16 @@
     - name: Show Docker compose version
       ansible.builtin.debug:
         msg: "{{ docker_compose_version.stdout }}"
+
+    - name: Login to GitHub Docker registry
+      ansible.builtin.shell:
+        cmd: echo "{{ github_pat }}" | docker login ghcr.io -u "{{ github_username }}" --password-stdin
+      no_log: true
+
+
+    # This is needed to run SonarQube (more accurate ElasticSearch):
+    - name: "sysctl -w vm.max_map_count=262144"
+      ansible.posix.sysctl:
+        name: vm.max_map_count
+        value: '262144'
+        sysctl_set: yes

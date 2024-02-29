@@ -1,0 +1,27 @@
+- name: Deploy SonarQube using Docker Compose
+  hosts: Ubuntu_Server
+  become: yes
+  tasks:
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Install required packages
+      ansible.builtin.apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+        state: present
+
+    - name: Copy Docker Compose Sonar file to the server
+      ansible.builtin.copy:
+        src: ../docker/docker-compose.sonar.yml
+        dest: /home/ubuntu/docker-compose.sonar.yml
+
+    - name: Run Docker Compose for SonarQube
+      ansible.builtin.shell:
+        cmd: docker-compose -f docker-compose.sonar.yml up -d
+        chdir: .

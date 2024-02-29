@@ -37,6 +37,14 @@ data "aws_ami" "ubuntu" {
 resource "aws_security_group" "ec2_sg" {
   name = "ec2-sg"
 
+  # Allow ICMP
+  ingress {
+    from_port   = -1
+    to_port     = -1
+    protocol    = "icmp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   ingress {
     cidr_blocks = [
       "0.0.0.0/0"
@@ -52,6 +60,16 @@ resource "aws_security_group" "ec2_sg" {
     ]
     from_port = 3000
     to_port   = 3000
+    protocol  = "tcp"
+  }
+
+  # SONAR QUBE
+  ingress {
+    cidr_blocks = [
+      "0.0.0.0/0"
+    ]
+    from_port = 9000
+    to_port   = 9000
     protocol  = "tcp"
   }
 
