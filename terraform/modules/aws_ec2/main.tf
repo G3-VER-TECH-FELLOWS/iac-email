@@ -58,8 +58,8 @@ resource "aws_security_group" "ec2_sg" {
     cidr_blocks = [
       "0.0.0.0/0"
     ]
-    from_port = 3000
-    to_port   = 3000
+    from_port = 2000
+    to_port   = 2000
     protocol  = "tcp"
   }
 

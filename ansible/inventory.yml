@@ -1,2 +1,2 @@
 [Ubuntu_Server]
-ec2 ansible_host=35.161.227.40
+ec2 ansible_host=35.87.41.177
